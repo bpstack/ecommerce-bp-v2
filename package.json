@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce-bp-v2",
+  "version": "1.0.0",
+  "description": "Modern e-commerce platform with Next.js and Strapi",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:backend\" \"pnpm run dev:frontend\"",
+    "dev:backend": "cd backend && pnpm run develop",
+    "dev:frontend": "cd frontend && pnpm run dev",
+    "build:frontend": "cd frontend && pnpm run build",
+    "start:frontend": "cd frontend && pnpm run start",
+    "install:all": "cd backend && pnpm install && cd ../frontend && pnpm install"
+  },
+  "keywords": [
+    "ecommerce",
+    "nextjs",
+    "strapi",
+    "typescript"
+  ],
+  "author": "bpstack",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
