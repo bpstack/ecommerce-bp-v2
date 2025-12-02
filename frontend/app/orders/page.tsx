@@ -158,7 +158,7 @@ export default function OrdersPage() {
               When you place an order, it will appear here.
             </p>
             <Link
-              href="/"
+              href="/products"
               className="inline-block bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 text-gray-900 dark:text-white font-medium py-3 px-8 rounded-lg transition-colors"
             >
               Start Shopping

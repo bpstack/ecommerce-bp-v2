@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { Home } from 'lucide-react';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -134,6 +135,13 @@ export default function RegisterPage() {
             Sign in
           </Link>
         </p>
+
+        {/* Alternative: Home link at the bottom */}
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+          <Link href="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+            ←  Return to Home
+          </Link>
+        </div>
       </div>
     </div>
   );

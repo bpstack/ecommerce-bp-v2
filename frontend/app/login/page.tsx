@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Home } from 'lucide-react';
 
 export default function LoginPage() {
   const [identifier, setIdentifier] = useState('');
@@ -100,6 +100,13 @@ export default function LoginPage() {
               Sign up
             </Link>
           </p>
+
+          {/* Alternative: Home link at the bottom */}
+          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+            <Link href="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+              ← Return to Home
+            </Link>
+          </div>
         </div>
       </div>
     </>

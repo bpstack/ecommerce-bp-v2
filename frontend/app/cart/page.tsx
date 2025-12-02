@@ -192,7 +192,7 @@ export default function CartPage() {
                 )}
 
                 <Link
-                  href="/"
+                  href="/products"
                   className="block w-full mt-3 text-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 text-sm transition-colors"
                 >
                   Continue Shopping

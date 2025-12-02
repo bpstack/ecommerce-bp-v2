@@ -1,6 +1,6 @@
 'use client'
 
-import { ShoppingCart, Package, User, Search, Menu, X, Star, TrendingUp, AlertCircle } from 'lucide-react'
+import { ShoppingCart, Package, User, Search, Menu, X, Star, TrendingUp, AlertCircle, Github, Linkedin, Mail } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -298,14 +298,58 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Bottom Info Strip */}
-      <div className="bg-[#232F3E] py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-white text-sm">
-            This is a demonstration project. No real transactions will be processed.
-          </p>
+      {/* Bottom Info Strip - Updated Footer */}
+      <footer className="bg-gray-900 dark:bg-gray-950 text-white">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center mb-6">
+            <p className="text-gray-400 dark:text-gray-500 mb-2">
+              This is a demonstration project. No real transactions will be processed.
+            </p>
+            <p className="text-gray-400 dark:text-gray-500">
+              e-commerce platform by{' '}
+              <a 
+                href="https://www.stackbp.es/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#FF9900] hover:text-[#FFB84D] transition-colors"
+              >
+                stackbp
+              </a>
+              {' '}• Built with Next.js, Strapi, database at Aiven Cloud
+            </p>
+          </div>
+          
+          {/* Social links */}
+          <div className="flex items-center justify-center gap-1">
+            <span className="text-xs text-gray-500 mr-3">Find me on</span>
+            <a
+              href="https://github.com/bpstack/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-gray-800 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/salvadorperez2021/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-gray-800 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="mailto:contact.bstack@gmail.com"
+              className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-gray-800 transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   )
 }
