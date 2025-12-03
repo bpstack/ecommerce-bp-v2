@@ -5,6 +5,17 @@ import { Product, StrapiResponse } from '@/types/product';
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 const STRAPI_API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337/api';
 
+// 🔴 TEMPORAL - Para ver el loading
+const SIMULATE_SLOW_NETWORK = false; // Cambiar a false cuando termines
+const DELAY_MS = 2000; // 2 segundos
+
+// Función helper para el delay
+async function artificialDelay() {
+  if (SIMULATE_SLOW_NETWORK) {
+    await new Promise(resolve => setTimeout(resolve, DELAY_MS));
+  }
+}
+
 /**
  * Get all products from Strapi
  * @param page - Page number for pagination (default: 1)
@@ -12,6 +23,8 @@ const STRAPI_API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localho
  */
 export async function getProducts(page: number = 1, pageSize: number = 25): Promise<StrapiResponse<Product[]>> {
   try {
+    await artificialDelay(); // 🔴 AÑADIR AQUÍ
+    
     const response = await fetch(
       `${STRAPI_API_URL}/products?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`,
       {
@@ -36,6 +49,8 @@ export async function getProducts(page: number = 1, pageSize: number = 25): Prom
  */
 export async function getProduct(documentId: string): Promise<Product> {
   try {
+    await artificialDelay(); // 🔴 AÑADIR AQUÍ (opcional para product detail)
+    
     const response = await fetch(
       `${STRAPI_API_URL}/products/${documentId}?populate=*`,
       {
@@ -61,6 +76,8 @@ export async function getProduct(documentId: string): Promise<Product> {
  */
 export async function searchProducts(query: string): Promise<StrapiResponse<Product[]>> {
   try {
+    await artificialDelay(); // 🔴 AÑADIR AQUÍ
+    
     const response = await fetch(
       `${STRAPI_API_URL}/products?filters[name][$containsi]=${query}&populate=*`,
       {
