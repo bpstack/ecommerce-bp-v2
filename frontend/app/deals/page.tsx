@@ -28,7 +28,7 @@ export default function DealsPage() {
                 Under Development
               </h2>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                We're implementing a Strapi backend API that records all transaction data. This section will enable trending analytics requests to identify the most popular deals and products.
+                I'm implementing a Strapi backend API that records all transaction data. This section will enable trending analytics requests to identify the most popular deals and products.
               </p>
             </div>
 
