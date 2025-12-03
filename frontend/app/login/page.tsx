@@ -106,6 +106,12 @@ export default function LoginPage() {
             <Link href="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
               ← Return to Home
             </Link>
+            <Link
+            href="/products"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium transition-colors"
+          >
+            Continue shopping as a Buyer
+          </Link>
           </div>
         </div>
       </div>

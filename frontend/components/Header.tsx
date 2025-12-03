@@ -173,7 +173,7 @@ export default function Header() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search products..."
+                    placeholder="Global search: products, categories, brands..."
                     className="flex-1 px-4 py-2.5 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 focus:outline-none dark:placeholder-gray-400"
                     autoComplete="off"
                   />

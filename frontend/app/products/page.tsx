@@ -1,7 +1,8 @@
 // frontend/app/products/page.tsx
 
 import { getProducts, searchProducts } from '@/lib/strapi';
-import ProductsClientWrapper from '@/components/ProductsClientWrapper'; // 👈 CAMBIO AQUÍ
+import ProductsClientWrapper from '@/components/ProductsClientWrapper';
+import Pagination from '@/components/Pagination';
 import Link from 'next/link';
 
 interface Props {
@@ -57,64 +58,33 @@ export default async function ProductsPage({ searchParams }: Props) {
           )}
         </div>
       ) : (
-        <div>
-          <ProductsClientWrapper products={products} /> {/* 👈 CAMBIO AQUÍ */}
-
+        <div className="space-y-8">
+          {/* Pagination Top */}
           {!searchQuery && totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-12">
-              {currentPage > 1 && (
-                <Link
-                  href={`/products?page=${currentPage - 1}`}
-                  className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors"
-                >
-                  Previous
-                </Link>
-              )}
-
-              <div className="flex items-center gap-1">
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  let pageNum;
-                  if (totalPages <= 5) {
-                    pageNum = i + 1;
-                  } else if (currentPage <= 3) {
-                    pageNum = i + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNum = totalPages - 4 + i;
-                  } else {
-                    pageNum = currentPage - 2 + i;
-                  }
-
-                  return (
-                    <Link
-                      key={pageNum}
-                      href={`/products?page=${pageNum}`}
-                      className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
-                        currentPage === pageNum
-                          ? 'bg-orange-400 dark:bg-orange-500 text-white font-bold'
-                          : 'bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white'
-                      }`}
-                    >
-                      {pageNum}
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {currentPage < totalPages && (
-                <Link
-                  href={`/products?page=${currentPage + 1}`}
-                  className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors"
-                >
-                  Next
-                </Link>
-              )}
+            <div className="flex justify-center">
+              <Pagination 
+                currentPage={currentPage} 
+                totalPages={totalPages}
+              />
             </div>
           )}
 
-          {!searchQuery && pagination && (
-            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
-              Page {currentPage} of {totalPages} - {pagination.total} products
-            </p>
+          <ProductsClientWrapper products={products} />
+
+          {/* Pagination Bottom */}
+          {!searchQuery && totalPages > 1 && (
+            <div className="space-y-4">
+              <Pagination 
+                currentPage={currentPage} 
+                totalPages={totalPages}
+              />
+              
+              {pagination && (
+                <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+                  Page {currentPage} of {totalPages} • {pagination.total} products total
+                </p>
+              )}
+            </div>
           )}
         </div>
       )}
