@@ -67,15 +67,17 @@ export default function LandingPage() {
 
             {/* Auth Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/products">
-                <button className="px-4 py-2 border border-[#FF9900] text-white hover:text-[#FF9900] rounded transition-colors">
-                  Browse as Guest
-                </button>
+              <Link 
+                href="/products"
+                className="px-4 py-2 border border-[#FF9900] text-white hover:text-[#FF9900] rounded transition-colors"
+              >
+                Browse as Guest
               </Link>
-              <Link href="/login">
-                <button className="px-4 py-2 bg-[#FF9900] text-[#232F3E] font-semibold rounded hover:bg-[#FFB84D] transition-colors">
-                  Sign In
-                </button>
+              <Link 
+                href="/login"
+                className="px-4 py-2 bg-[#FF9900] text-[#232F3E] font-semibold rounded hover:bg-[#FFB84D] transition-colors"
+              >
+                Sign In
               </Link>
             </div>
 
@@ -96,15 +98,17 @@ export default function LandingPage() {
                 <button className="text-left py-2 hover:text-[#FF9900]">Deals</button>
                 <button className="text-left py-2 hover:text-[#FF9900]">Customer Service</button>
                 <div className="pt-4 space-y-2 border-t border-gray-700">
-                  <Link href="/products" className="block">
-                    <button className="w-full px-4 py-2 border border-[#FF9900] text-white rounded">
-                      Browse as Guest
-                    </button>
+                  <Link 
+                    href="/products" 
+                    className="block w-full px-4 py-2 border border-[#FF9900] text-white rounded text-center"
+                  >
+                    Browse as Guest
                   </Link>
-                  <Link href="/login" className="block">
-                    <button className="w-full px-4 py-2 bg-[#FF9900] text-[#232F3E] font-semibold rounded">
-                      Sign In
-                    </button>
+                  <Link 
+                    href="/login" 
+                    className="block w-full px-4 py-2 bg-[#FF9900] text-[#232F3E] font-semibold rounded text-center"
+                  >
+                    Sign In
                   </Link>
                 </div>
               </div>
@@ -145,19 +149,36 @@ export default function LandingPage() {
               Developed by @bpstack
             </p>
 
+            {/* Important Note about Backend */}
+            <div className="max-w-2xl mx-auto mb-10 bg-white/10 backdrop-blur-sm border border-[#FF9900]/30 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <AlertCircle size={20} className="text-[#FF9900] flex-shrink-0 mt-0.5" />
+                <div className="text-left">
+                  <p className="text-sm text-gray-200 font-medium mb-1">Note:</p>
+                  <p className="text-xs text-gray-300 leading-relaxed">
+                    The backend for this live demo is hosted on Render's free tier. 
+                    It "sleeps" after periods of inactivity, so the first request may take 30-60 seconds to wake up. 
+                    After that, the site will work normally with minimal latency.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
-                <button className="px-8 py-4 bg-[#FFD814] text-[#0F1111] font-bold text-lg rounded-lg hover:bg-[#F7CA00] transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
-                  <Package size={24} />
-                  Explore Products
-                </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link 
+                href="/products" 
+                className="w-full sm:w-auto px-8 py-4 bg-[#FFD814] text-[#0F1111] font-bold text-lg rounded-lg hover:bg-[#F7CA00] transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+              >
+                <Package size={24} />
+                Explore Products
               </Link>
-              <Link href="/login">
-                <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white hover:text-[#232F3E] transition-all transform hover:scale-105 flex items-center justify-center gap-2">
-                  <User size={24} />
-                  Sign In
-                </button>
+              <Link 
+                href="/login" 
+                className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white hover:text-[#232F3E] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                <User size={24} />
+                Sign In
               </Link>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
@@ -25,13 +26,48 @@ export default function Header() {
       {/* Main Header */}
       <div className="bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-4 py-3">
+          <div className="flex items-center justify-between gap-2 sm:gap-4 py-3">
             {/* Logo */}
             <Link href="/products" className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop</h1>
+              {/* Desktop Logo - Light Mode */}
+              <Image 
+                src="/images/amazon-logo.png" 
+                alt="Amazon Logo" 
+                width={100} 
+                height={30}
+                className="hidden sm:block dark:hidden"
+                priority
+              />
+              {/* Desktop Logo - Dark Mode */}
+              <Image 
+                src="/images/amazon-logo-white.png" 
+                alt="Amazon Logo" 
+                width={100} 
+                height={30}
+                className="hidden dark:sm:block"
+                priority
+              />
+              {/* Mobile Logo - Light Mode */}
+              <Image 
+                src="/images/amazon-mobile-logo.png" 
+                alt="Amazon Logo" 
+                width={40} 
+                height={40}
+                className="block sm:hidden dark:hidden"
+                priority
+              />
+              {/* Mobile Logo - Dark Mode */}
+              <Image 
+                src="/images/amazon-mobile-logo-white.png" 
+                alt="Amazon Logo" 
+                width={40} 
+                height={40}
+                className="hidden dark:block dark:sm:hidden"
+                priority
+              />
             </Link>
 
-            {/* Search Bar */}
+            {/* Search Bar - Hidden on mobile, visible on sm and up */}
             <form onSubmit={handleSearch} className="flex-1 max-w-3xl hidden sm:block">
               <div className="flex bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
                 <input
@@ -64,17 +100,22 @@ export default function Header() {
             </form>
 
             {/* Right Side */}
-            <div className="flex items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
               {/* User Account */}
               {!isLoading && (
                 <>
                   {user ? (
                     <div className="relative group">
-                      <button className="hover:text-orange-400 dark:hover:text-orange-300 transition-colors text-sm text-left">
-                        <div className="text-xs text-gray-600 dark:text-gray-400">Hello, {user.username}</div>
-                        <div className="font-bold">Account ▾</div>
+                      <button className="hover:text-orange-400 dark:hover:text-orange-300 transition-colors text-sm text-left p-1">
+                        <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Hello, {user.username}</div>
+                        <div className="font-bold text-sm sm:text-base">
+                          <span className="hidden sm:inline">Account ▾</span>
+                          <span className="sm:hidden">
+                            {user.username.length > 10 ? `${user.username.substring(0, 10)}...` : user.username}
+                          </span>
+                        </div>
                       </button>
-                      {/* Dropdown */}
+                      {/* Dropdown - Adjusted positioning for mobile */}
                       <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                         <div className="p-3 border-b border-gray-200 dark:border-gray-700">
                           <p className="text-sm font-medium text-gray-900 dark:text-white">{user.username}</p>
@@ -101,8 +142,11 @@ export default function Header() {
                       href="/login"
                       className="hover:text-orange-400 dark:hover:text-orange-300 transition-colors text-sm"
                     >
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Hello, Sign in</div>
-                      <div className="font-bold">Account</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Hello, Sign in</div>
+                      <div className="font-bold text-sm sm:text-base">
+                        <span className="hidden sm:inline">Account</span>
+                        <span className="sm:hidden">Sign in</span>
+                      </div>
                     </Link>
                   )}
                 </>
@@ -117,17 +161,19 @@ export default function Header() {
                 <div className="font-bold">& Orders</div>
               </Link>
 
-              {/* Theme Toggle */}
-              <ThemeToggle />
+              {/* Theme Toggle - Larger size */}
+              <div className="scale-110 sm:scale-100">
+                <ThemeToggle />
+              </div>
 
-              {/* Cart */}
+              {/* Cart - Larger size */}
               <Link
                 href="/cart"
-                className="flex items-center gap-2 hover:text-orange-400 dark:hover:text-orange-300 transition-colors"
+                className="flex items-center gap-1 sm:gap-2 hover:text-orange-400 dark:hover:text-orange-300 transition-colors"
               >
                 <div className="relative">
                   <svg
-                    className="w-8 h-8"
+                    className="w-7 sm:w-8 h-7 sm:h-8"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -150,7 +196,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
+      {/* Mobile Search Bar - Only visible on mobile */}
       <div className="sm:hidden bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-4 py-2">
         <form onSubmit={handleSearch}>
           <div className="flex bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
