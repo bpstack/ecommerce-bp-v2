@@ -1,3 +1,5 @@
+//app/page.tsx
+
 'use client'
 
 import { ShoppingCart, Package, User, Search, Menu, X, Star, TrendingUp, AlertCircle, Github, Linkedin, Mail } from 'lucide-react'
@@ -156,14 +158,16 @@ export default function LandingPage() {
                 <div className="text-left">
                   <p className="text-sm text-gray-200 font-medium mb-1">Note:</p>
                   <p className="text-xs text-gray-300 leading-relaxed">
-                    The backend for this live demo is hosted on Render's free tier. 
-                    It "sleeps" after periods of inactivity, so the first request may take 30-60 seconds to wake up. 
-                    After that, the site will work normally with minimal latency.
+                    This site is deployed in production for testing/preview purposes only.<br />
+                    Live demo backend is hosted on Render's free tier.
+                    It "sleeps" after periods of inactivity, so the first request may take ~60 seconds to wake up.
+                    After that, the site will work normally with some latency.<br />
+                    Thank you for your understanding!
                   </p>
+
                 </div>
               </div>
             </div>
-
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link 

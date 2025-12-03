@@ -1,3 +1,5 @@
+//frontend/components/Header.tsx
+
 'use client';
 
 import { useState } from 'react';
@@ -6,6 +8,7 @@ import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const navItems = ["All", "Today's Deals", "Customer Service", "Registry", "Gift Cards", "Sell"];
 
@@ -16,9 +19,13 @@ export default function Header() {
   const { user, logout, isLoading } = useAuth();
   const cartCount = getCartItemsCount();
 
+  const router = useRouter();
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   return (
