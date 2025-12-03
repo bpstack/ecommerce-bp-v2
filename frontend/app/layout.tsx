@@ -21,14 +21,24 @@ const geistMono = Geist_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#FF9900',
 };
 
 export const metadata: Metadata = {
   title: "Shop - Modern E-commerce",
   description: "Modern e-commerce platform built with Next.js and Strapi",
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'bpshop',
+  },
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
   },
 };
 
@@ -39,6 +49,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#FF9900" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
