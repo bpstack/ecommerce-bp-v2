@@ -51,7 +51,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#FF9900" />
+        <meta name="theme-color" content="#6366f1" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
