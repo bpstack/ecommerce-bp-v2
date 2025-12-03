@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Shop - Modern E-commerce",
-  description: "Modern e-commerce platform built with Next.js and Strapi",
+  title: "bpshop - Headless e-commerce",
+  description: "Developer-first marketplace built with Next.js and Strapi. Modular, API-driven architecture designed for extensibility, performance, and seamless integrations.",
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -61,6 +62,24 @@ export default function RootLayout({
             <CartProvider>
               {children}
               <Analytics />
+              {/* Desktop: top-center, Mobile: bottom-center */}
+              <div className="hidden sm:block">
+                <Toaster 
+                  position="top-center" 
+                  richColors 
+                  offset="80px"
+                  expand={true} 
+                />
+              </div>
+
+              <div className="block sm:hidden">
+                <Toaster 
+                  position="bottom-center" 
+                  richColors 
+                  offset="50px"
+                  expand={true} 
+                />
+              </div>
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>

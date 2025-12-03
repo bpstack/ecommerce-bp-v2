@@ -1,5 +1,4 @@
 // frontend/context/CartContext.tsx
-
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useRef } from 'react';
@@ -14,6 +13,7 @@ import {
   migrateCart,
 } from '@/lib/strapi';
 import { useAuth } from './AuthContext';
+import { toast } from 'sonner'; // 👈 YA ESTÁ IMPORTADO ✅
 
 export interface CartItem {
   id: number;
@@ -78,6 +78,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     } catch (error) {
       console.error('Error loading cart:', error);
+      toast.error('Failed to load cart'); // 👈 NUEVO
     } finally {
       setIsLoading(false);
     }
@@ -96,8 +97,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
         try {
           await migrateCart(sessionId, user.id);
           await loadCart();
+          toast.success('Cart synced to your account'); // 👈 NUEVO
         } catch (error) {
           console.error('Error migrating cart:', error);
+          toast.error('Failed to sync cart'); // 👈 NUEVO
         }
       }
       previousUserId.current = user?.id || null;
@@ -107,7 +110,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [user, sessionId, loadCart]);
 
   const addToCart = async (product: Product, quantity: number = 1) => {
-    if (!cartId) return;
+    if (!cartId) {
+      toast.error('Cart not ready'); // 👈 NUEVO
+      return;
+    }
 
     try {
       // Check if product already in cart
@@ -116,24 +122,41 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (existingItem) {
         // Update quantity
         await updateCartItem(existingItem.documentId, existingItem.quantity + quantity);
+        toast.success('Cart updated', { // 👈 NUEVO
+          description: `${product.name} quantity increased`,
+        });
       } else {
         // Add new item
         await addCartItem(cartId, product.id, quantity);
+        toast.success('Added to cart', { // 👈 NUEVO
+          description: product.name,
+        });
       }
 
       // Reload cart to get updated data
       await loadCart();
     } catch (error) {
       console.error('Error adding to cart:', error);
+      toast.error('Failed to add to cart'); // 👈 NUEVO
     }
   };
 
   const removeFromCart = async (documentId: string) => {
     try {
+      // Find product name before removing
+      const item = items.find(i => i.documentId === documentId);
+      
       await removeCartItem(documentId);
       await loadCart();
+      
+      if (item) {
+        toast.success('Removed from cart', { // 👈 NUEVO
+          description: item.product.name,
+        });
+      }
     } catch (error) {
       console.error('Error removing from cart:', error);
+      toast.error('Failed to remove item'); // 👈 NUEVO
     }
   };
 
@@ -146,13 +169,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       await updateCartItem(documentId, quantity);
       await loadCart();
+      toast.success('Quantity updated'); // 👈 NUEVO
     } catch (error) {
       console.error('Error updating quantity:', error);
+      toast.error('Failed to update quantity'); // 👈 NUEVO
     }
   };
 
   const clearCart = () => {
-    setItems([]);
+    if (items.length > 0) {
+      setItems([]);
+      toast.success('Cart cleared'); // 👈 NUEVO
+    }
   };
 
   const getCartTotal = () => {
