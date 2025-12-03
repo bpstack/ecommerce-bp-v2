@@ -119,7 +119,7 @@ export default function Header() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between gap-2 sm:gap-4 py-3">
               {/* Logo */}
-              <Link href="/products" className="flex-shrink-0">
+              <Link href="/" className="flex-shrink-0">
                 <Image 
                   src="/images/amazon-logo.png" 
                   alt="Amazon Logo" 
@@ -168,30 +168,34 @@ export default function Header() {
 
               {/* Search Bar - Desktop */}
               <form onSubmit={handleSearch} className="flex-1 max-w-3xl hidden sm:block">
-                <div className="flex bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden border-2 border-transparent focus-within:border-orange-400 transition-colors">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Global search: products, categories, brands..."
-                    className="flex-1 px-4 py-2.5 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 focus:outline-none dark:placeholder-gray-400"
+                    className="w-full pl-10 pr-24 py-2.5 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 transition-all placeholder-gray-400 dark:placeholder-gray-500"
                     autoComplete="off"
                   />
-                  {searchQuery && (
+                  
+                  <div className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                    {searchQuery && (
+                      <button
+                        type="button"
+                        onClick={clearSearch}
+                        className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      >
+                        <X className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+                      </button>
+                    )}
                     <button
-                      type="button"
-                      onClick={clearSearch}
-                      className="px-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                      type="submit"
+                      className="bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 px-4 py-1.5 rounded-md transition-colors flex items-center justify-center"
                     >
-                      <X className="w-5 h-5" />
+                      <Search className="w-4 h-4 text-gray-900 dark:text-white" />
                     </button>
-                  )}
-                  <button
-                    type="submit"
-                    className="bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 px-6 transition-colors flex items-center justify-center"
-                  >
-                    <Search className="w-5 h-5 text-gray-900 dark:text-white" />
-                  </button>
+                  </div>
                 </div>
               </form>
 
@@ -306,30 +310,34 @@ export default function Header() {
         {/* Mobile Search Bar */}
         <div className="sm:hidden bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-4 py-2">
           <form onSubmit={handleSearch}>
-            <div className="flex bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none z-10" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="flex-1 px-4 py-2.5 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 focus:outline-none dark:placeholder-gray-400"
+                className="w-full pl-10 pr-20 py-2.5 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 transition-all placeholder-gray-400 dark:placeholder-gray-500"
                 autoComplete="off"
               />
-              {searchQuery && (
+              
+              <div className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={clearSearch}
+                    className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                  >
+                    <X className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+                  </button>
+                )}
                 <button
-                  type="button"
-                  onClick={clearSearch}
-                  className="px-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  type="submit"
+                  className="bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 px-3 py-1.5 rounded-md transition-colors flex items-center justify-center"
                 >
-                  <X className="w-5 h-5" />
+                  <Search className="w-4 h-4 text-gray-900 dark:text-white" />
                 </button>
-              )}
-              <button
-                type="submit"
-                className="bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 px-4 transition-colors flex items-center justify-center"
-              >
-                <Search className="w-5 h-5 text-gray-900 dark:text-white" />
-              </button>
+              </div>
             </div>
           </form>
         </div>

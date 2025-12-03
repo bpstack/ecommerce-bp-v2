@@ -2,7 +2,7 @@
 
 'use client'
 
-import { ShoppingCart, Package, User, Search, Menu, X, Star, TrendingUp, AlertCircle, Github, Linkedin, Mail } from 'lucide-react'
+import { ShoppingCart, Package, User, Search, Menu, X, Star, TrendingUp, AlertCircle, Github, Linkedin, Mail, CreditCard, Palette, Server } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -280,45 +280,210 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      {/* Featured Implementation Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-[#0F1111]">Featured Products</h2>
-            <Link href="/products" className="text-[#007185] hover:text-[#FF9900] hover:underline text-sm font-medium">
-              See all products →
-            </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-[#0F1111] mb-4">Project Features</h2>
+            <p className="text-gray-600">Full-stack e-commerce implementation with real backend integration</p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {mockProducts.slice(0, 4).map((product) => (
-              <div key={product.id} className="bg-white border border-gray-200 rounded-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div className="bg-gradient-to-br from-gray-100 to-gray-200 h-48 flex items-center justify-center group-hover:from-gray-200 group-hover:to-gray-300 transition-colors">
-                  <Package className="text-gray-400 group-hover:text-gray-500" size={60} />
+            {/* Product Catalog */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <Package className="text-[#FF9900]" size={24} />
                 </div>
-                <div className="p-4">
-                  <h3 className="font-medium text-[#0F1111] mb-2 line-clamp-2">{product.name}</h3>
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className={i < Math.floor(product.rating) ? 'fill-[#FF9900] text-[#FF9900]' : 'fill-gray-200 text-gray-200'}
-                      />
-                    ))}
-                    <span className="text-xs text-[#007185] ml-1">({product.reviews.toLocaleString()})</span>
-                  </div>
-                  <div className="flex items-baseline gap-1 mb-3">
-                    <span className="text-xs text-gray-600">$</span>
-                    <span className="text-2xl font-medium text-[#0F1111]">{Math.floor(product.price)}</span>
-                    <span className="text-xs text-gray-600">{(product.price % 1).toFixed(2).substring(1)}</span>
-                  </div>
-                  <button className="w-full py-2 bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] text-sm font-medium rounded-full transition-colors">
-                    Add to Cart
-                  </button>
-                </div>
+                <h3 className="font-semibold text-[#0F1111]">Product Catalog</h3>
               </div>
-            ))}
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>84+ products database</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Responsive grid layout</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Optimized images</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Rating system UI</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Shopping Cart */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <ShoppingCart className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">Shopping Cart</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Database persistence</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Session management</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Quantity controls</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Guest cart migration</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* User Authentication */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <User className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">Authentication</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>JWT token auth</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>User registration</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Secure login/logout</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Profile management</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Checkout & Orders */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <CreditCard className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">Checkout Flow</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Order processing</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Shipping address</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Order confirmation</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Order history</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Search & Filters */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <Search className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">Search & Filters</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Product search</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Category filters</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Price sorting</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Real-time filtering</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* UI/UX Features */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <Palette className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">UI/UX Design</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Dark/Light mode</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Responsive design</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Amazon-inspired UI</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Mobile optimized</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Infrastructure */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF9900]/10 rounded-lg">
+                  <Server className="text-[#FF9900]" size={24} />
+                </div>
+                <h3 className="font-semibold text-[#0F1111]">Infrastructure</h3>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-1.5">
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Vercel deployment</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>PostgreSQL database</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>Strapi CMS backend</span>
+                </li>
+                <li className="flex items-start gap-1">
+                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span>SSL certificate</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
