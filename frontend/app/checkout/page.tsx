@@ -1,3 +1,5 @@
+//frontend/app/checkout/page.tsx
+
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 import { formatPrice, getImageUrl, createOrder } from '@/lib/strapi';
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper'; // 👈 CAMBIO AQUÍ
 
 interface ShippingAddress {
   fullName: string;
@@ -83,7 +85,7 @@ export default function CheckoutPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <Header />
+        <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
         <div className="container mx-auto px-4 py-8 text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Please sign in to checkout
@@ -102,7 +104,7 @@ export default function CheckoutPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <Header />
+        <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
         <div className="container mx-auto px-4 py-8">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
@@ -116,7 +118,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <Header />
+        <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
         <div className="container mx-auto px-4 py-8 text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Your cart is empty
@@ -134,7 +136,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Header />
+      <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
 
       <main className="container mx-auto px-4 py-6 lg:py-8">
         <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-6">

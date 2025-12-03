@@ -1,7 +1,7 @@
 // frontend/app/products/page.tsx
 
 import { getProducts, searchProducts } from '@/lib/strapi';
-import ProductsClient from '@/components/ProductsClient';
+import ProductsClientWrapper from '@/components/ProductsClientWrapper'; // 👈 CAMBIO AQUÍ
 import Link from 'next/link';
 
 interface Props {
@@ -58,7 +58,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         </div>
       ) : (
         <div>
-          <ProductsClient products={products} />
+          <ProductsClientWrapper products={products} /> {/* 👈 CAMBIO AQUÍ */}
 
           {!searchQuery && totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 mt-12">

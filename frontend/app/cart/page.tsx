@@ -6,7 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { formatPrice, getImageUrl } from '@/lib/strapi';
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper'; // 👈 CAMBIO AQUÍ
 
 export default function CartPage() {
   const { items, isLoading, updateQuantity, removeFromCart, getCartTotal } = useCart();
@@ -15,7 +15,7 @@ export default function CartPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <Header />
+        <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
         <div className="container mx-auto px-4 py-8">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
@@ -29,7 +29,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Header />
+      <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
       
       <main className="container mx-auto px-4 py-6 lg:py-8">
         <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-6">

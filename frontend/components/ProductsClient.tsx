@@ -1,3 +1,5 @@
+//frontend/components/ProductsClient.tsx
+
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';

@@ -1,6 +1,6 @@
 // frontend/app/products/layout.tsx
 
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function ProductsLayout({
@@ -10,7 +10,7 @@ export default function ProductsLayout({
 }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      <Header />
+      <HeaderWrapper />
       {children}
       
       <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-16">

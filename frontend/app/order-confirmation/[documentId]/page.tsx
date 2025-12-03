@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper'; // 👈 CAMBIO AQUÍ
 import { formatPrice } from '@/lib/strapi';
 
 export default function OrderConfirmationPage() {
@@ -14,7 +14,7 @@ export default function OrderConfirmationPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Header />
+      <HeaderWrapper /> {/* 👈 CAMBIO AQUÍ */}
 
       <main className="container mx-auto px-4 py-8 lg:py-16">
         <div className="max-w-2xl mx-auto text-center">
