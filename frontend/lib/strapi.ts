@@ -28,9 +28,10 @@ export async function getProducts(page: number = 1, pageSize: number = 25): Prom
     const response = await fetch(
       `${STRAPI_API_URL}/products?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`,
       {
-        cache: 'no-store', // Always fetch fresh data
+        next: { revalidate: 60 },
       }
     );
+
 
     if (!response.ok) {
       throw new Error(`Failed to fetch products: ${response.statusText}`);
@@ -84,6 +85,7 @@ export async function searchProducts(query: string): Promise<StrapiResponse<Prod
         cache: 'no-store',
       }
     );
+
 
     if (!response.ok) {
       throw new Error(`Failed to search products: ${response.statusText}`);
@@ -415,4 +417,30 @@ export async function getUserOrders(token: string): Promise<StrapiResponse<any>>
   return response.json();
 }
 
+
+/**
+ * Get total number of product pages
+ * Used by generateStaticParams for ISR
+ */
+export async function getTotalProductPages(pageSize: number = 25): Promise<number> {
+  try {
+    const response = await fetch(
+      `${STRAPI_API_URL}/products?pagination[page]=1&pagination[pageSize]=1`,
+      { next: { revalidate: 60 } }
+    );
+
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product count: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const total = data.meta?.pagination?.total || 0;
+    
+    return Math.ceil(total / pageSize);
+  } catch (error) {
+    console.error('Error fetching total pages:', error);
+    return 1;
+  }
+}
 export { STRAPI_URL, STRAPI_API_URL };

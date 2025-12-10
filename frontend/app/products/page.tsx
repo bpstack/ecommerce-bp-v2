@@ -1,26 +1,30 @@
-// frontend/app/products/page.tsx
+// app/products/page.tsx
+// Maneja: /products (página 1) y /products?search=xxx
 
 import { getProducts, searchProducts } from '@/lib/strapi';
 import ProductsClientWrapper from '@/components/ProductsClientWrapper';
 import Pagination from '@/components/Pagination';
 import Link from 'next/link';
 
+const PAGE_SIZE = 25;
+
 interface Props {
-  searchParams: Promise<{ page?: string; search?: string }>;
+  searchParams: Promise<{ search?: string }>;
 }
 
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
-  const currentPage = Number(params.page) || 1;
   const searchQuery = params.search || '';
-  const pageSize = 25;
+  const currentPage = 1; // Esta página siempre es la 1
 
   let productsData;
   
   if (searchQuery) {
+    // Búsqueda: siempre dinámica
     productsData = await searchProducts(searchQuery);
   } else {
-    productsData = await getProducts(currentPage, pageSize);
+    // Página 1 del catálogo
+    productsData = await getProducts(currentPage, PAGE_SIZE);
   }
 
   const products = productsData.data;
@@ -59,7 +63,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         </div>
       ) : (
         <div className="space-y-8">
-          {/* Pagination Top */}
+          {/* Pagination Top - Solo si no hay búsqueda */}
           {!searchQuery && totalPages > 1 && (
             <div className="flex justify-center">
               <Pagination 

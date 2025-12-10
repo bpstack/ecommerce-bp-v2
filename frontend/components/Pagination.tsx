@@ -1,4 +1,4 @@
-// frontend/components/Pagination.tsx
+// components/Pagination.tsx
 'use client';
 
 import Link from 'next/link';
@@ -7,10 +7,16 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  baseUrl?: string;
 }
 
-export default function Pagination({ currentPage, totalPages, baseUrl = '/products' }: PaginationProps) {
+// Helper: genera la URL correcta para cada página
+function getPageUrl(page: number): string {
+  // Página 1 → /products
+  // Páginas 2+ → /products/2, /products/3, etc.
+  return page === 1 ? '/products' : `/products/${page}`;
+}
+
+export default function Pagination({ currentPage, totalPages }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
@@ -53,7 +59,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl = '/produc
       {/* Previous Button */}
       {currentPage > 1 ? (
         <Link
-          href={`${baseUrl}?page=${currentPage - 1}`}
+          href={getPageUrl(currentPage - 1)}
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -89,7 +95,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl = '/produc
           return (
             <Link
               key={pageNum}
-              href={`${baseUrl}?page=${pageNum}`}
+              href={getPageUrl(pageNum)}
               className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg text-sm font-medium transition-all ${
                 isActive
                   ? 'bg-orange-500 text-white shadow-sm'
@@ -105,7 +111,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl = '/produc
       {/* Next Button */}
       {currentPage < totalPages ? (
         <Link
-          href={`${baseUrl}?page=${currentPage + 1}`}
+          href={getPageUrl(currentPage + 1)}
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
         >
           <span className="hidden sm:inline">Next</span>
