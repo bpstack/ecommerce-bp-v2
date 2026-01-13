@@ -28,7 +28,7 @@ export default function GiftCardsPage() {
                 Under Development
               </h2>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                I'm creating a comprehensive rewards system that recognizes customer participation across all platform activities.
+                I&apos;m creating a comprehensive rewards system that recognizes customer participation across all platform activities.
               </p>
             </div>
 

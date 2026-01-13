@@ -49,7 +49,7 @@ export default function OrderConfirmationPage() {
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8 text-left">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-              What's Next?
+              What&apos;s Next?
             </h2>
             <ul className="space-y-3 text-gray-600 dark:text-gray-400">
               <li className="flex items-start gap-3">

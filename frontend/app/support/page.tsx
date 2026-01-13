@@ -28,7 +28,7 @@ export default function SupportPage() {
                 Under Development
               </h2>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                I'm building an intelligent chat system with real-time AI responses and live agent support.
+                I&apos;m building an intelligent chat system with real-time AI responses and live agent support.
               </p>
             </div>
 

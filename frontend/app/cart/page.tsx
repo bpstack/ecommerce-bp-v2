@@ -55,7 +55,7 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Looks like you haven't added anything to your cart yet.
+              Looks like you haven&apos;t added anything to your cart yet.
             </p>
             <Link
               href="/products"
@@ -183,7 +183,7 @@ export default function CartPage() {
                       Sign in to Checkout
                     </Link>
                     <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-                      Don't have an account?{' '}
+                      Don&apos;t have an account?{' '}
                       <Link href="/register" className="text-orange-500 hover:text-orange-600">
                         Sign up
                       </Link>

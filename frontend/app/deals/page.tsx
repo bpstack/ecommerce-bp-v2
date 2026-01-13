@@ -13,7 +13,7 @@ export default function DealsPage() {
         {/* Main Content */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-light text-gray-900 dark:text-white mb-4">
-            Today's Deals
+            Today&apos;s Deals
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
             Coming Soon
@@ -28,7 +28,7 @@ export default function DealsPage() {
                 Under Development
               </h2>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                I'm implementing a Strapi backend API that records all transaction data. This section will enable trending analytics requests to identify the most popular deals and products.
+                I&apos;m implementing a Strapi backend API that records all transaction data. This section will enable trending analytics requests to identify the most popular deals and products.
               </p>
             </div>
 

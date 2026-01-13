@@ -28,7 +28,7 @@ export default function SellerPage() {
                 Under Development
               </h2>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                I'm building a comprehensive seller platform. This feature will be available in the next release.
+                I&apos;m building a comprehensive seller platform. This feature will be available in the next release.
               </p>
             </div>
 
