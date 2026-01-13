@@ -146,7 +146,7 @@ frontend/components/
 - Set `NEXT_PUBLIC_STRAPI_URL` and `NEXT_PUBLIC_STRAPI_API_URL`
 - ISR works out of the box
 
-**Backend** (Railway/Render/Docker):
+**Backend** (Railway/Render/Docker - Strapi):
 - Use PostgreSQL
 - Set `DATABASE_HOST`, `PORT`, `ADMIN_JWT_SECRET`
 - Configure CORS for frontend domain
