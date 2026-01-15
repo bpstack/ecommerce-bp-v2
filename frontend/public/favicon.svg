@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo negro con bordes redondeados -->
+  <rect width="512" height="512" rx="80" ry="80" fill="#0a0a0a"/>
+
+  <!-- Letra a minúscula blanca -->
+  <text
+    x="256"
+    y="240"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="340"
+    font-weight="bold"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >a</text>
+
+  <!-- Flecha/sonrisa naranja estilo Amazon -->
+  <path
+    d="M 90 380
+       Q 256 470, 422 380"
+    stroke="#FF9900"
+    stroke-width="38"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Punta de flecha -->
+  <path
+    d="M 378 350
+       L 422 380
+       L 392 425"
+    stroke="#FF9900"
+    stroke-width="38"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>

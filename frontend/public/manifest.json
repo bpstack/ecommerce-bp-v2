@@ -1,31 +1,44 @@
 {
-  "name": "bpstack Shop - E-commerce Demo",
+  "name": "bpshop - E-commerce",
   "short_name": "bpshop",
   "description": "Modern e-commerce platform built with Next.js and Strapi",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#ffffff",
-  "theme_color": "##6366f1",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FF9900",
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/favicon-16x16.png",
       "sizes": "16x16",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "/favicon-32x32.png",
       "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
     },
     {
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "/android-chrome-192x192.png",

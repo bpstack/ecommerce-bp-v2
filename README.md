@@ -8,7 +8,7 @@ Full-stack e-commerce with Next.js 16 (frontend) and Strapi v5 (headless CMS). P
 
 ```bash
 cd backend && npm run develop    # Strapi at localhost:1337/admin
-cd frontend && npm run dev       # Next.js at localhost:3000
+cd frontend && pnpm dev          # Next.js at localhost:3000
 ```
 
 ## What it does
@@ -19,6 +19,9 @@ cd frontend && npm run dev       # Next.js at localhost:3000
 - **Checkout flow** with shipping address form and order creation
 - **Order history** for authenticated users
 - **Theme toggle** with semantic Tailwind tokens
+- **Toast notifications** for cart actions, login feedback, errors
+- **PWA support** - installable app with offline caching and auto-updates
+- **Analytics** - Google Analytics + Vercel Analytics integration
 
 ## Backend (Strapi v5)
 
@@ -121,7 +124,28 @@ frontend/components/
 - TypeScript 5
 - Tailwind CSS 3.4
 - React Context API
+- Serwist 9.5.0 (PWA/Service Worker)
+- Sonner (toast notifications)
+- Google Analytics + Vercel Analytics
 - pnpm
+
+## PWA Features
+
+The app is installable as a Progressive Web App with full offline support.
+
+**Service Worker** (`app/sw.ts`):
+- Pages: NetworkFirst (always fresh when online)
+- Images: CacheFirst (30-day cache)
+- CSS/JS: CacheFirst (immutable assets)
+- Fonts: CacheFirst (1-year cache)
+- API: NetworkFirst (5-min fallback cache)
+
+**Components** (`components/pwa/`):
+- `ServiceWorkerRegister` - Registers SW, checks updates hourly
+- `UpdateNotification` - Toast when new version available
+- `InstallPrompt` - Install button (Android) + iOS instructions modal
+
+**Build requirement**: Uses webpack for production build (`next build --webpack`) as Serwist doesn't support Turbopack yet.
 
 ## Developer notes
 
