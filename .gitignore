@@ -45,3 +45,6 @@ desktop.ini
 # Testing
 coverage/
 .nyc_output/
+# Project documentation (private)
+ROADMAP.md
+TODO.md
