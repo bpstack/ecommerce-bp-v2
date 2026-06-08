@@ -36,6 +36,7 @@
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
+  "packageManager": "pnpm@10.13.1",
   "strapi": {
     "uuid": "3227b117-a0d1-483a-a718-ddc294f0dedd",
     "installId": "305a12b39de6cfe42df292a336ff9d6fa0445fe9aa332a7a4b777335635cdd16"
