@@ -4,24 +4,83 @@ Full-stack e-commerce with Next.js 16 (frontend) and Strapi v5 (headless CMS). P
 
 **Live:** https://e-shop.stackbp.es/
 
-## Quick start
+## Local development
 
-Backend and frontend run on **different Node versions** (Strapi 5.30 caps at Node 22;
-Next 16 requires Node 24) with `engine-strict=true`, so they **cannot** share one process.
-Start each in its own terminal:
+> **Read this first.** This is a monorepo with two apps that run on **different Node
+> versions**. Getting the Node version right per app is the only tricky part of running it
+> locally — everything below explains exactly how.
+
+### Why two Node versions
+
+Each app pins its own runtime, and both enforce it with `engine-strict=true`:
+
+| App        | Path        | Node   | Package manager | Runs on             |
+| ---------- | ----------- | ------ | --------------- | ------------------- |
+| Backend    | `backend/`  | **22** | pnpm `10.13.1`  | `localhost:1337`    |
+| Frontend   | `frontend/` | **24** | pnpm `10.13.1`  | `localhost:3000`    |
+
+- **Backend (Strapi 5.30)** only supports Node ≤ 22 → `backend/.nvmrc` = `22`.
+- **Frontend (Next 16)** requires Node 24 → `frontend/.nvmrc` = `24`.
+
+Because no single Node version satisfies both, **there is no combined `dev` script** — you
+start each app in its own terminal with its own Node. In production this is a non-issue: the
+backend deploys to Render and the frontend to Vercel, each with its own runtime.
+
+### Prerequisites
+
+- **[fnm](https://github.com/Schniz/fnm)** (or nvm) to switch Node per app.
+- **Node 22 and Node 24** installed:
+  ```bash
+  fnm install 22
+  fnm install 24
+  ```
+- **pnpm** is pinned per package via the `packageManager` field, so **Corepack** resolves the
+  right version automatically (`corepack enable` once, if not already).
+
+### First-time setup
+
+Install dependencies for each app (each has its own lockfile):
+
+```bash
+# Backend deps (under Node 22)
+cd backend && fnm use 22 && pnpm install
+
+# Frontend deps (under Node 24)
+cd frontend && fnm use 24 && pnpm install
+```
+
+Copy and fill the backend env file (`backend/.env`). In dev the backend uses **SQLite**
+(`backend/.tmp/`), so no external database is needed to run locally.
+
+### Running it (two terminals)
 
 ```bash
 # Terminal 1 — backend (Node 22)
-cd backend && pnpm run develop   # Strapi at localhost:1337/admin
+cd backend
+fnm use 22            # or rely on fnm's --use-on-cd with backend/.nvmrc
+pnpm run develop      # → Strapi admin at http://localhost:1337/admin
 
 # Terminal 2 — frontend (Node 24)
-cd frontend && fnm use 24 && pnpm dev   # Next.js at localhost:3000
+cd frontend
+fnm use 24            # or rely on fnm's --use-on-cd with frontend/.nvmrc
+pnpm dev              # → storefront at http://localhost:3000
 ```
 
-> There is intentionally **no combined `dev` script** at the monorepo root: no single Node
-> version satisfies both apps. Node is pinned per package via `.nvmrc` (backend `22`,
-> frontend `24`). In prod they deploy separately — backend to Render, frontend to Vercel —
-> so the split is a non-issue there.
+> **Tip:** enable fnm's auto-switch (`fnm env --use-on-cd`) so `cd backend` / `cd frontend`
+> picks the Node version from each `.nvmrc` automatically — then you can skip the `fnm use`
+> lines.
+
+### The monorepo root
+
+The root `package.json` holds **no dependencies**. Its only jobs are pinning pnpm
+(`packageManager`) for any command run from the repo root, and a single convenience script:
+
+```bash
+pnpm run dev:backend   # shortcut for the backend (runs under your default Node 22)
+```
+
+There is deliberately no frontend shortcut at the root: it would run under Node 22 and fail
+the frontend's engine check. Always start the frontend from the `frontend/` folder on Node 24.
 
 ## What it does
 
@@ -53,7 +112,7 @@ session/           # crypto UUID, httpOnly cookie, 30-day expiry
 - `session.ts` - Generates UUIDs, sets secure cookies, handles HTTPS detection
 - `custom-cart.ts` - Merges anonymous cart to user cart on login via `POST /api/carts/migrate`
 
-**Database**: SQLite in dev (`backend/.tmp/db.sqlite`), PostgreSQL in prod via `backend/config/database.ts`.
+**Database**: SQLite in dev (`backend/.tmp/data.db`, override with `DATABASE_FILENAME`), PostgreSQL in prod via `backend/config/database.ts`.
 
 ## Frontend (Next.js 16 App Router)
 
@@ -165,7 +224,8 @@ The app is installable as a Progressive Web App with full offline support.
 - **Theming**: CSS variables in `app/globals.css`. Semantic classes like `bg-layer-1`, `text-text-secondary`.
 - **Session cookies**: httpOnly, secure in prod, 30-day expiry.
 - **Test creds**: `test` / `test123` in development.
-- **CORS**: Configure in Strapi admin to allow frontend domain.
+- **CORS**: Configured in code at `backend/config/middlewares.ts` with an explicit origin
+  allowlist (prod domain + `localhost:3000/3001`). Add new frontend origins there, not in the admin.
 
 ## Extending it
 
@@ -178,15 +238,15 @@ The app is installable as a Progressive Web App with full offline support.
 
 ## Deployment
 
-**Frontend** (Vercel):
+**Frontend** (Vercel, Node 24):
 - Set `NEXT_PUBLIC_STRAPI_URL` and `NEXT_PUBLIC_STRAPI_API_URL`
-- ISR works out of the box
+- Build runs on webpack (`next build --webpack`, required by Serwist); ISR works out of the box
 
-**Backend** (Render):
-- Use PostgreSQL
-- Set `DATABASE_URL`, `ADMIN_JWT_SECRET`, `API_TOKEN_SALT`
-- Configure CORS for frontend domain
-- Build: `npm run build`, Start: `npm run start`
+**Backend** (Render, Node 22):
+- Use PostgreSQL; set `DATABASE_URL` (or the individual `DATABASE_*` vars) plus the Strapi
+  secrets: `APP_KEYS`, `ADMIN_JWT_SECRET`, `API_TOKEN_SALT`, `TRANSFER_TOKEN_SALT`, `ENCRYPTION_KEY`
+- Allowed CORS origins live in `backend/config/middlewares.ts` (edit there for new domains)
+- Build: `pnpm run build`, Start: `pnpm run start`
 
 ## The evolution
 
