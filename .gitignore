@@ -6,7 +6,7 @@ node_modules/
 .env
 .env.local
 .env*.local
-.env.prouction
+.env.production
 backend/.env
 
 # Build outputs
