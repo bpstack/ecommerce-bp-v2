@@ -35,8 +35,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-
-
 ---
 
 ## 🏗️ Arquitectura del Sistema Completo
@@ -88,12 +86,14 @@ Content-Types:
 ## 🔐 Sistema de Autenticación
 
 ### **Strapi incluye:**
+
 - ✅ JWT tokens automático
 - ✅ Register endpoint: `/api/auth/local/register`
 - ✅ Login endpoint: `/api/auth/local`
 - ✅ Roles & Permissions integrados
 
 ### **Frontend (Next.js):**
+
 - Página `/register` - Formulario completo
 - Página `/login` - Autenticación
 - Contexto AuthContext - Manejo de sesión
@@ -104,6 +104,7 @@ Content-Types:
 ## 👥 Roles y Permisos
 
 ### **Customer (Usuario normal):**
+
 - ✅ Ver productos
 - ✅ Agregar al carrito
 - ✅ Hacer checkout
@@ -112,6 +113,7 @@ Content-Types:
 - ❌ NO ve pedidos de otros
 
 ### **Admin:**
+
 - ✅ Todo lo que puede hacer Customer
 - ✅ Ver TODOS los pedidos
 - ✅ Actualizar estado de pedidos
@@ -123,6 +125,7 @@ Content-Types:
 ## 📦 Flujo del Sistema
 
 ### **1. Usuario se registra:**
+
 ```
 Frontend → POST /api/auth/local/register
 {
@@ -135,6 +138,7 @@ Frontend → POST /api/auth/local/register
 ```
 
 ### **2. Usuario agrega dirección:**
+
 ```
 Frontend → POST /api/addresses
 {
@@ -148,6 +152,7 @@ Frontend → POST /api/addresses
 ```
 
 ### **3. Usuario hace checkout:**
+
 ```
 Frontend → POST /api/orders
 {
@@ -164,6 +169,7 @@ Frontend → POST /api/orders
 ```
 
 ### **4. Admin ve todos los pedidos:**
+
 ```
 Admin Panel → GET /api/orders?populate=*
 ← Lista completa de pedidos con usuario y dirección
@@ -174,6 +180,7 @@ Admin Panel → GET /api/orders?populate=*
 ## 🎨 Páginas a Crear
 
 ### **Frontend:**
+
 ```
 pages/
 ├── /register           # Formulario completo de registro
@@ -205,22 +212,26 @@ pages/
 ## 📋 Plan de Implementación
 
 ### **Fase 1: Autenticación (2-3 días)**
+
 1. Configurar Strapi Auth
 2. Crear páginas login/register
 3. AuthContext en Next.js
 4. Protected routes
 
 ### **Fase 2: Perfil y Direcciones (2 días)**
+
 5. Crear Content-Type Address
 6. Páginas de gestión de direcciones
 7. Formulario de perfil
 
 ### **Fase 3: Sistema de Pedidos (3-4 días)**
+
 8. Crear Content-Types Order y OrderItem
 9. Página de checkout
 10. Integrar con Strapi API
 
 ### **Fase 4: Panel Admin (2 días)**
+
 11. Página admin/orders
 12. Filtros y búsqueda
 13. Actualizar estado de pedidos

@@ -14,10 +14,10 @@ Full-stack e-commerce with Next.js 16 (frontend) and Strapi v5 (headless CMS). P
 
 Each app pins its own runtime, and both enforce it with `engine-strict=true`:
 
-| App        | Path        | Node   | Package manager | Runs on             |
-| ---------- | ----------- | ------ | --------------- | ------------------- |
-| Backend    | `backend/`  | **22** | pnpm `10.13.1`  | `localhost:1337`    |
-| Frontend   | `frontend/` | **24** | pnpm `10.13.1`  | `localhost:3000`    |
+| App      | Path        | Node   | Package manager | Runs on          |
+| -------- | ----------- | ------ | --------------- | ---------------- |
+| Backend  | `backend/`  | **22** | pnpm `10.13.1`  | `localhost:1337` |
+| Frontend | `frontend/` | **24** | pnpm `10.13.1`  | `localhost:3000` |
 
 - **Backend (Strapi 5.30)** only supports Node ≤ 22 → `backend/.nvmrc` = `22`.
 - **Frontend (Next 16)** requires Node 24 → `frontend/.nvmrc` = `24`.
@@ -149,6 +149,7 @@ Two search modes:
 2. **Client filter** - Debounced 400ms, filters loaded products in-memory
 
 Category groups map keywords to filters:
+
 ```typescript
 {
   'Clothing': ['apparel', 'clothing', 'tshirts', 'hoodies'],
@@ -205,6 +206,7 @@ frontend/components/
 The app is installable as a Progressive Web App with full offline support.
 
 **Service Worker** (`app/sw.ts`):
+
 - Pages: NetworkFirst (always fresh when online)
 - Images: CacheFirst (30-day cache)
 - CSS/JS: CacheFirst (immutable assets)
@@ -212,6 +214,7 @@ The app is installable as a Progressive Web App with full offline support.
 - API: NetworkFirst (5-min fallback cache)
 
 **Components** (`components/pwa/`):
+
 - `ServiceWorkerRegister` - Registers SW, checks updates hourly
 - `UpdateNotification` - Toast when new version available
 - `InstallPrompt` - Install button (Android) + iOS instructions modal
@@ -239,10 +242,12 @@ The app is installable as a Progressive Web App with full offline support.
 ## Deployment
 
 **Frontend** (Vercel, Node 24):
+
 - Set `NEXT_PUBLIC_STRAPI_URL` and `NEXT_PUBLIC_STRAPI_API_URL`
 - Build runs on webpack (`next build --webpack`, required by Serwist); ISR works out of the box
 
 **Backend** (Render, Node 22):
+
 - Use PostgreSQL; set `DATABASE_URL` (or the individual `DATABASE_*` vars) plus the Strapi
   secrets: `APP_KEYS`, `ADMIN_JWT_SECRET`, `API_TOKEN_SALT`, `TRANSFER_TOKEN_SALT`, `ENCRYPTION_KEY`
 - Allowed CORS origins live in `backend/config/middlewares.ts` (edit there for new domains)

@@ -70,21 +70,19 @@ Eso ya lo puedes hacer.
 Para pedidos, checkout y pagos, hay que crear nuevas funcionalidades. ¿Quieres desarrollarlo ahora o lo dejamos para otra sesión?
 Si seguimos, el siguiente paso sería crear el Content Type "Order" en Strapi.
 
-
-
 Flujo normal de desarrollo:
 
 Ahora: SQLite en local → pruebas rápidas sin tocar producción
 Cuando funcione: Push a GitHub → Render despliega → Aiven crea las tablas
 
-
 # Database - SQLite (.env.local)
+
 DATABASE_CLIENT=sqlite
 DATABASE_FILENAME=.tmp/data.db
 
 Volvemos a postgres
+
 # Database (.env.production)
+
 DATABASE_CLIENT=postgres
 DATABASE_FILENAME=.tmp/data.db // borramos esta
-
-
