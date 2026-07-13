@@ -169,23 +169,22 @@ export default function InstallPrompt() {
   if (!showPrompt || (!deferredPrompt && !isIOS)) return null;
 
   return (
-    <button
-      onClick={handleInstall}
-      className="fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-full shadow-lg transition-all hover:scale-105 cursor-pointer animate-in slide-in-from-left-4 duration-300"
-      aria-label="Instalar aplicación"
-    >
-      <Download className="w-5 h-5" />
-      <span className="font-medium text-sm">Instalar App</span>
+    <div className="fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-full shadow-lg transition-all hover:scale-105 animate-in slide-in-from-left-4 duration-300">
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleDismiss();
-        }}
+        onClick={handleInstall}
+        className="flex items-center gap-2 cursor-pointer"
+        aria-label="Instalar aplicación"
+      >
+        <Download className="w-5 h-5" />
+        <span className="font-medium text-sm">Instalar App</span>
+      </button>
+      <button
+        onClick={handleDismiss}
         className="ml-1 p-1 hover:bg-white/20 rounded-full transition-colors cursor-pointer"
         aria-label="Cerrar"
       >
         <X className="w-4 h-4" />
       </button>
-    </button>
+    </div>
   );
 }
