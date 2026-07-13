@@ -6,10 +6,22 @@ Full-stack e-commerce with Next.js 16 (frontend) and Strapi v5 (headless CMS). P
 
 ## Quick start
 
+Backend and frontend run on **different Node versions** (Strapi 5.30 caps at Node 22;
+Next 16 requires Node 24) with `engine-strict=true`, so they **cannot** share one process.
+Start each in its own terminal:
+
 ```bash
-cd backend && npm run develop    # Strapi at localhost:1337/admin
-cd frontend && pnpm dev          # Next.js at localhost:3000
+# Terminal 1 — backend (Node 22)
+cd backend && pnpm run develop   # Strapi at localhost:1337/admin
+
+# Terminal 2 — frontend (Node 24)
+cd frontend && fnm use 24 && pnpm dev   # Next.js at localhost:3000
 ```
+
+> There is intentionally **no combined `dev` script** at the monorepo root: no single Node
+> version satisfies both apps. Node is pinned per package via `.nvmrc` (backend `22`,
+> frontend `24`). In prod they deploy separately — backend to Render, frontend to Vercel —
+> so the split is a non-issue there.
 
 ## What it does
 

@@ -4,7 +4,6 @@
   "description": "Modern e-commerce platform with Next.js and Strapi",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"pnpm run dev:backend\" \"pnpm run dev:frontend\"",
     "dev:backend": "cd backend && pnpm run develop",
     "dev:frontend": "cd frontend && pnpm run dev",
     "build:frontend": "cd frontend && pnpm run build",
@@ -19,8 +18,5 @@
   ],
   "author": "bpstack",
   "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^9.2.1"
-  },
   "packageManager": "pnpm@10.13.1"
 }
