@@ -265,3 +265,7 @@ v4: Current - auth, cart migration, ISR     (production features)
 Started as an e-commerce learning project. Became a full platform because scope creep is a feature.
 
 Built to be read, tweaked, and enjoyed.
+
+## License
+
+[MIT](LICENSE) © 2026 [bpstack](https://stackbp.es)
