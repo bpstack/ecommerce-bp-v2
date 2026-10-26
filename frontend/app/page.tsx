@@ -171,7 +171,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-[#05070D] text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
-          <div className="text-center md:text-left text-gray-500">
+          <div className="text-center md:text-left text-sm text-gray-400">
             <p>This is a demonstration project. No real transactions will be processed.</p>
             <p>
               e-commerce platform by{' '}
