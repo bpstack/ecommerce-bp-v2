@@ -248,8 +248,14 @@ The app is installable as a Progressive Web App with full offline support.
 
 **Backend** (Render, Node 22):
 
-- Use PostgreSQL; set `DATABASE_URL` (or the individual `DATABASE_*` vars) plus the Strapi
-  secrets: `APP_KEYS`, `ADMIN_JWT_SECRET`, `API_TOKEN_SALT`, `TRANSFER_TOKEN_SALT`, `ENCRYPTION_KEY`
+- Use PostgreSQL (production runs on a self-hosted instance): set `DATABASE_CLIENT=postgres` and
+  the individual vars `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`,
+  `DATABASE_PASSWORD`
+- TLS: `DATABASE_SSL=true`, `DATABASE_SSL_CA` with the server certificate and
+  `DATABASE_SSL_REJECT_UNAUTHORIZED=true`. **Do not set `DATABASE_URL`**: `backend/config/database.ts`
+  passes it as `connectionString`, and an `sslmode` in the URL overrides the TLS settings above
+- Strapi secrets: `APP_KEYS`, `ADMIN_JWT_SECRET`, `API_TOKEN_SALT`, `TRANSFER_TOKEN_SALT`,
+  `ENCRYPTION_KEY`
 - Allowed CORS origins live in `backend/config/middlewares.ts` (edit there for new domains)
 - Build: `pnpm run build`, Start: `pnpm run start`
 

@@ -73,7 +73,7 @@ Si seguimos, el siguiente paso sería crear el Content Type "Order" en Strapi.
 Flujo normal de desarrollo:
 
 Ahora: SQLite en local → pruebas rápidas sin tocar producción
-Cuando funcione: Push a GitHub → Render despliega → Aiven crea las tablas
+Cuando funcione: Push a GitHub → Render despliega → Strapi crea las tablas en el PostgreSQL de producción (VPS propio)
 
 # Database - SQLite (.env.local)
 
