@@ -16,5 +16,12 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  bootstrap({ strapi }) {
+    // The host sleeps when idle, so the daily cron (config/server.ts) may never
+    // fire: purge on every start too. Not awaited, so it cannot delay startup.
+    strapi
+      .service('api::cart.cart')
+      .purgeExpiredGuests()
+      .catch((error) => strapi.log.error('Expired guest carts purge failed', error));
+  },
 };

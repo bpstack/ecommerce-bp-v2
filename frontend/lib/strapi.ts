@@ -120,146 +120,59 @@ export function getImageUrl(imagePath: string): string {
   return `/${imagePath}`;
 }
 
-/**
- * Get or create session
- */
-export async function getSession(): Promise<{ sessionId: string }> {
-  const response = await fetch(`${STRAPI_API_URL}/session`, {
-    credentials: 'include',
-  });
+export interface CartResponse {
+  items: { id: number; documentId: string; quantity: number; product: Product }[];
+}
 
-  if (!response.ok) {
-    throw new Error('Failed to get session');
+/** The saved token is expired or invalid: the user has to sign in again. */
+export class SessionExpiredError extends Error {
+  constructor() {
+    super('Session expired');
+    this.name = 'SessionExpiredError';
   }
-
-  return response.json();
 }
 
 /**
- * Get cart by sessionId
+ * Call the cart API. The server decides whose cart it is: the logged-in user
+ * (token) or, for guests, the session cookie.
  */
-export async function getCart(sessionId: string): Promise<StrapiResponse<any>> {
-  const response = await fetch(
-    `${STRAPI_API_URL}/carts?filters[sessionId][$eq]=${sessionId}&populate[cart_items][populate]=product`,
-    {
-      credentials: 'include',
-      cache: 'no-store',
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to get cart');
-  }
-
-  return response.json();
-}
-
-/**
- * Create a new cart
- */
-export async function createCart(sessionId: string): Promise<any> {
-  const response = await fetch(`${STRAPI_API_URL}/carts`, {
-    method: 'POST',
+async function cartRequest(
+  token: string | null,
+  method: string,
+  path: string,
+  body?: object
+): Promise<CartResponse> {
+  const response = await fetch(`${STRAPI_API_URL}/cart${path}`, {
+    method,
     headers: {
-      'Content-Type': 'application/json',
+      ...(body && { 'Content-Type': 'application/json' }),
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
-    body: JSON.stringify({
-      data: {
-        sessionId,
-      },
-    }),
+    cache: 'no-store',
+    body: body && JSON.stringify(body),
   });
 
+  // The server only answers 401 when it is sent a token it does not accept.
+  if (response.status === 401) throw new SessionExpiredError();
+
   if (!response.ok) {
-    throw new Error('Failed to create cart');
+    throw new Error(`Cart request failed: ${response.status}`);
   }
 
   return response.json();
 }
 
-/**
- * Add item to cart
- */
-export async function addCartItem(
-  cartId: number,
-  productId: number,
-  quantity: number
-): Promise<any> {
-  const response = await fetch(`${STRAPI_API_URL}/cart-items`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify({
-      data: {
-        cart: cartId,
-        product: productId,
-        quantity,
-      },
-    }),
-  });
+export const getCart = (token: string | null) => cartRequest(token, 'GET', '');
 
-  if (!response.ok) {
-    throw new Error('Failed to add item to cart');
-  }
+export const addCartItem = (token: string | null, productId: string, quantity: number) =>
+  cartRequest(token, 'POST', '/items', { productId, quantity });
 
-  return response.json();
-}
+export const updateCartItem = (token: string | null, documentId: string, quantity: number) =>
+  cartRequest(token, 'PUT', `/items/${documentId}`, { quantity });
 
-/**
- * Update cart item quantity
- */
-export async function updateCartItem(
-  documentId: string,
-  quantity: number
-): Promise<any> {
-  const response = await fetch(`${STRAPI_API_URL}/cart-items/${documentId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify({
-      data: {
-        quantity,
-      },
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to update cart item');
-  }
-
-  return response.json();
-}
-
-/**
- * Remove item from cart
- */
-export async function removeCartItem(documentId: string): Promise<void> {
-  const response = await fetch(`${STRAPI_API_URL}/cart-items/${documentId}`, {
-    method: 'DELETE',
-    credentials: 'include',
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to remove cart item');
-  }
-
-  // DELETE requests typically return 204 No Content, no need to parse JSON
-  // Only parse JSON if there's content
-  if (response.status !== 204 && response.headers.get('content-length') !== '0') {
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      return response.json();
-    }
-  }
-  
-  // Return void for successful deletes with no content
-  return;
-}
+export const removeCartItem = (token: string | null, documentId: string) =>
+  cartRequest(token, 'DELETE', `/items/${documentId}`);
 
 /**
  * Register a new user
@@ -314,30 +227,6 @@ export async function loginUser(
 
   return response.json();
 }
-
-/**
- * Migrate anonymous cart to user
- */
-export async function migrateCart(sessionId: string, userId: number): Promise<any> {
-  const response = await fetch(`${STRAPI_API_URL}/carts/migrate`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify({
-      sessionId,
-      userId,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to migrate cart');
-  }
-
-  return response.json();
-}
-
 
 /**
  * Create a new order

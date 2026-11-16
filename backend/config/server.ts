@@ -8,4 +8,11 @@ export default ({ env }) => ({
   proxy: {
     koa: true,
   },
+  cron: {
+    enabled: true,
+    tasks: {
+      // Daily at 04:00
+      '0 4 * * *': ({ strapi }) => strapi.service('api::cart.cart').purgeExpiredGuests(),
+    },
+  },
 });
