@@ -26,7 +26,7 @@ export default function ProductsLayout({
               >
                 stackbp
               </a>
-              {' '}- Built with Next.js, Strapi, database at Aiven Cloud
+              {' '}- Built with Next.js, Strapi, self-hosted PostgreSQL
             </p>
           </div>
           

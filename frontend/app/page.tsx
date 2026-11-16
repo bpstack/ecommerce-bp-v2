@@ -183,7 +183,7 @@ export default function LandingPage() {
               >
                 stackbp
               </a>
-              {' '}• Built with Next.js, Strapi, database at Aiven Cloud
+              {' '}• Built with Next.js, Strapi, self-hosted PostgreSQL
             </p>
           </div>
 
