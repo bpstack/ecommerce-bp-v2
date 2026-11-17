@@ -1,7 +1,7 @@
 // frontend/app/layout.tsx
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -11,14 +11,16 @@ import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from 'sonner';
 import { ServiceWorkerRegister, UpdateNotification, InstallPrompt } from '@/components/pwa';
 
-const geistSans = Geist({
+const ubuntu = Ubuntu({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
-const geistMono = Geist_Mono({
+const ubuntuMono = Ubuntu_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const viewport: Viewport = {
@@ -182,7 +184,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${ubuntu.variable} ${ubuntuMono.variable} antialiased`}
       >
         <ThemeProvider>
           <AuthProvider>
